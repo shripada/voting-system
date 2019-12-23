@@ -1,0 +1,17 @@
+{
+    "name": "explorer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "run": "node index.js"
+    },
+    "author": "Shripada <shripada.hebbar@hp.com> (hp.com)",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "lodash": "^4.17.15",
+        "node-fetch": "^2.6.0"
+    }
+}
