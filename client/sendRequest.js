@@ -11,10 +11,10 @@ const signer = new CryptoFactory(context).newSigner(privateKey);
 function sendRequest(payload) {
     const payloadBytes = cbor.encode(payload);
     const transactionHeaderBytes = protobuf.TransactionHeader.encode({
-        familyName: 'simplestore',
+        familyName: 'voting_system',
         familyVersion: '1.0',
-        inputs: ['917479'],
-        outputs: ['917479'],
+        inputs: ['71c0c0'],
+        outputs: ['71c0c0'],
         signerPublicKey: signer.getPublicKey().asHex(),
         batcherPublicKey: signer.getPublicKey().asHex(),
         dependencies: [],

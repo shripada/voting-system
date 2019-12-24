@@ -11,7 +11,7 @@ const instance = axios.create({
 instance
     .get('/state', {
         params: {
-            address: 91747901,
+            address: '71c0c001',
         },
     })
     .then(response => {
@@ -27,7 +27,7 @@ instance
 instance
     .get('/state', {
         params: {
-            address: 91747900,
+            address: '71c0c000',
         },
     })
     .then(response => {
@@ -43,7 +43,7 @@ instance
 instance
     .get('/state', {
         params: {
-            address: 91747910,
+            address: '71c0c010',
         },
     })
     .then(response => {
