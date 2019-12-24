@@ -16,7 +16,7 @@ instance
     })
     .then(response => {
         let data = lget(response, 'data.data');
-        console.log('PARTIES\n=================\n');
+        console.log('\nPARTIES\n=================\n');
         for (party of data) {
             const partyData = party.data;
             const buf = Buffer.from(partyData, 'base64');

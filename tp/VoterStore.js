@@ -8,56 +8,41 @@ class VoterStore {
         this.timeout = 500;
     }
 
-    addVoter(voter) {
+    async addVoter(voter) {
         let address = voterAddress(voter.voterId);
-        let stateEntriesToSend = {};
         let voterInfo = {};
         voterInfo['voterId'] = voter.voterId;
-        voterInfo.voted = false;
+        voterInfo.voted = voter.voted ? true : false;
         let data = Buffer.from(serialise(voterInfo));
-
-        return this.context
-            .setState({ [address]: data }, this.timeout)
-            .then(() => {
-                console.log('Successfully added voter info:', voter);
-            })
-            .catch(error => console.log('error:', error));
+        return await this.context.setState({ [address]: data }, this.timeout);
     }
 
-    voterExists(voterId) {
+    async voterExists(voterId) {
         var address = voterAddress(voterId);
-        return this.context
-            .getState([address], this.timeout)
-            .then(votersInfo => {
-                const voter = votersInfo[address];
-                if (Buffer.isBuffer(voter)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            })
-            .catch(error => {
-                return false;
-            });
+        const votersInfo = await this.context.getState([address], this.timeout);
+        const voter = votersInfo[address];
+        if (Buffer.isBuffer(voter)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    getVoter(voterId) {
+    async getVoter(voterId) {
         var address = voterAddress(voterId);
-        return this.context.getState([address], this.timeout).then(function(votersInfo) {
-            const voter = votersInfo[address];
-            if (Buffer.isBuffer(voter)) {
-                const json = voter.toString();
-                voterObj = JSON.parse(json);
-                return voterObj;
-            } else {
-                return undefined;
-            }
-        });
+        const votersInfo = await this.context.getState([address], this.timeout);
+        const voter = votersInfo[address];
+        if (Buffer.isBuffer(voter)) {
+            const json = voter.toString();
+            let voterObj = JSON.parse(json);
+            return voterObj;
+        } else {
+            return undefined;
+        }
     }
 
-    addVote(vote) {
+    async addVote(vote) {
         let address = voterAddress(vote.voterId);
-        let stateEntriesToSend = {};
         let voterInfo = {};
         voterInfo['id'] = vote.voterId;
         voterInfo.voted = true;
@@ -65,19 +50,13 @@ class VoterStore {
 
         let data = Buffer.from(serialise(voterInfo));
 
-        return this.context
-            .setState({ [address]: data }, this.timeout)
-            .then(() => {
-                console.log('Successfully added voter info:', voter);
-            })
-            .catch(error => console.log('error:', error));
+        return await this.context.setState({ [address]: data }, this.timeout);
     }
 
-    hasVoted(voterId) {
-        return this.getVoter(voterId).then(voterInfo => {
-            if (voterInfo) return voterInfo.voted;
-            else return false;
-        });
+    async hasVoted(voterId) {
+        const voterInfo = await this.getVoter(voterId);
+        if (voterInfo) return voterInfo.voted;
+        else return false;
     }
 }
 const voterAddress = voterId => TP_NAMESPACE + '00' + _hash(voterId).substring(0, 62);

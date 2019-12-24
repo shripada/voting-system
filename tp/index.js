@@ -1,8 +1,8 @@
 const { TransactionProcessor } = require('sawtooth-sdk/processor');
-const SimpleStoreHandler = require('./handler');
+const VotingSystemHandler = require('./handler');
 const transactionProcessor = new TransactionProcessor('tcp://localhost:4004');
 
-transactionProcessor.addHandler(new SimpleStoreHandler());
+transactionProcessor.addHandler(new VotingSystemHandler());
 transactionProcessor.start();
 
 console.log(`Welcome to Voting system`);
