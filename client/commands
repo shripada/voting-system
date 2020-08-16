@@ -1,0 +1,23 @@
+curl http://localhost:8008/state?address="91747901"
+
+
+
+node sendRequest.js '{"action":"addParty", "partyId":"A"}'
+node sendRequest.js '{"action":"addParty", "partyId":"B"}'
+node sendRequest.js '{"action":"addParty", "partyId":"C"}'
+
+node sendRequest.js '{"action":"addVoter", "voterId":"1"}'
+node sendRequest.js '{"action":"addVoter", "voterId":"2"}'
+node sendRequest.js '{"action":"addVoter", "voterId":"3"}'
+node sendRequest.js '{"action":"addVoter", "voterId":"4"}'
+node sendRequest.js '{"action":"addVoter", "voterId":"5"}'
+
+node sendRequest.js '{"action":"addVote", "partyId":"A", "voterId":"1"}'
+
+ 
+
+
+const buf = Buffer.from('', 'base64');
+let cbor = require('cbor')
+let object = cbor.decode(buf)
+console.log(object)

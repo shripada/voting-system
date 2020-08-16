@@ -10,7 +10,7 @@
             "name": "client",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/client/sendRequest.js",
-            "args": ["{\"action\": \"addParty\", \"partyId\":\"1\"}"]
+            "args": ["{\"action\": \"addParty\", \"partyId\":\"2\"}"]
         },
         {
             "type": "node",

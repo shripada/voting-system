@@ -18,9 +18,7 @@ function sendRequest(payload) {
         signerPublicKey: signer.getPublicKey().asHex(),
         batcherPublicKey: signer.getPublicKey().asHex(),
         dependencies: [],
-        payloadSha512: createHash('sha512')
-            .update(payloadBytes)
-            .digest('hex'),
+        payloadSha512: createHash('sha512').update(payloadBytes).digest('hex'),
         nonce: new Date().toString(),
     }).finish();
 
@@ -36,7 +34,7 @@ function sendRequest(payload) {
 
     const batchHeaderBytes = protobuf.BatchHeader.encode({
         signerPublicKey: signer.getPublicKey().asHex(),
-        transactionIds: transactions.map(txn => txn.headerSignature),
+        transactionIds: transactions.map((txn) => txn.headerSignature),
     }).finish();
 
     headerSignature = signer.sign(batchHeaderBytes);
@@ -60,6 +58,12 @@ function sendRequest(payload) {
         (err, response) => {
             if (err) return console.log(err);
             console.log(response.body);
+            let body = JSON.parse(response.body);
+            setTimeout(() => {
+                request(body.link, (error, response, body) => {
+                    console.log(body);
+                });
+            }, 3000);
         }
     );
 }
