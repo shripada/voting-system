@@ -64,6 +64,6 @@ function sendRequest(payload) {
     );
 }
 
-var args = process.argv;
-var payload = JSON.parse(args[2]);
+let args = process.argv;
+let payload = JSON.parse(args[2]);
 sendRequest(payload);
