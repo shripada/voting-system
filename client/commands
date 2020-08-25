@@ -14,10 +14,14 @@ node sendRequest.js '{"action":"addVoter", "voterId":"5"}'
 
 node sendRequest.js '{"action":"addVote", "partyId":"A", "voterId":"1"}'
 
- 
+curl http://localhost:8008/blocks -o blocks.json
 
 
 const buf = Buffer.from('', 'base64');
 let cbor = require('cbor')
 let object = cbor.decode(buf)
 console.log(object)
+
+docker-compose -f /Volumes/Development/sawtooth-exps/voting-system/docker-compose.yml up
+
+docker-compose -f /Volumes/Development/sawtooth-exps/voting-system/docker-compose.yml down

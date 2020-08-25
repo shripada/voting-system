@@ -63,6 +63,11 @@ function sendRequest(payload) {
                 request(body.link, (error, response, body) => {
                     console.log(body);
                 });
+            }, 0);
+            setTimeout(() => {
+                request(body.link, (error, response, body) => {
+                    console.log(body);
+                });
             }, 3000);
         }
     );
