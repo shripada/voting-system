@@ -15,7 +15,7 @@ People in a constituency voting for these 3 parties: A, B, C
 
 # Code structure
 ## Transaction processor
-Folder ![tp](/tp) contains the code of transaction processor. The file ![handler.js](./tp/handler.js) contains the main transaction processing logic. 
+Folder [tp](/tp) contains the code of transaction processor. The file ![handler.js](./tp/handler.js) contains the main transaction processing logic. 
 
 ## Client
 Folder ![client](./client) contains the code of the client, which is responsible to send the transaction to our blockchain app.  
